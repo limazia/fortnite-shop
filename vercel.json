@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/fonts/(.*)",
-      "destination": "/public/assets/fonts/$1"
+      "destination": "/public/fonts/$1"
     }
   ]
 }
