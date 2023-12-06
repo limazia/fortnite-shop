@@ -1,0 +1,857 @@
+/* App */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+*:focus {
+  outline: 0;
+}
+
+html {
+  -webkit-scroll-behavior: smooth;
+  -moz-scroll-behavior: smooth;
+  -ms-scroll-behavior: smooth;
+  scroll-behavior: smooth;
+  overflow-y: scroll;
+}
+
+html,
+body,
+#app {
+  min-height: 100%;
+}
+
+body {
+  text-rendering: optimizeLegibility !important;
+  -webkit-font-smoothing: antialiased !important;
+  font-family: "Inter", Arial, sans-serif;
+  background-color: #ffffff;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 0;
+  scrollbar-width: 6px;
+}
+
+::-webkit-scrollbar,
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #60676d;
+}
+
+::-webkit-scrollbar,
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+img,
+svg {
+  -webkit-user-drag: none;
+}
+
+a:link, a:visited, a:hover, a:active {
+  text-decoration: none;
+}
+
+button:hover,
+button:focus,
+button:active,
+button:active:focus:not(:disabled):not(.disabled) {
+  box-shadow: none !important;
+  outline: 0 !important;
+}
+
+.btn:hover,
+.btn:focus,
+.btn:active,
+.btn:active:focus:not(:disabled):not(.disabled) {
+  box-shadow: none !important;
+  outline: 0 !important;
+}
+
+/* Fonts */
+@font-face {
+  font-family: "Burbank Big Condensed";
+  font-style: normal;
+  font-weight: normal;
+  font-display: swap;
+  src: url("assets/fonts/fortnite/burbank.eot");
+  src: url("assets/fonts/fortnite/burbank.eot?#iefix") format("embedded-opentype"), url("assets/fonts/fortnite/burbank.woff2") format("woff2"), url("assets/fonts/fortnite/burbank.woff") format("woff"), url("assets/fonts/fortnite/burbank.ttf") format("truetype"), url("assets/fonts/fortnite/burbank.svg#Burbank Big Condensed") format("svg");
+}
+@font-face {
+  font-family: "Fortnite";
+  src: url("assets/fonts/fortnite/Fortnite.woff2") format("woff2"), url("assets/fonts/fortnite/Fortnite.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+/* Components */
+.card {
+  word-wrap: break-word;
+  background-clip: border-box;
+  border-radius: 0.375rem;
+  border: 2px solid #d0d7de;
+}
+.card .card-header {
+  border-bottom: 2px solid #d0d7de;
+}
+.card .card-header:first-child {
+  border-radius: 0.375rem 0.375rem 0 0;
+}
+.card .card-body {
+  border-radius: 0.375rem;
+}
+.card .card-footer {
+  border-top: 2px solid #d0d7de;
+}
+.card .card-footer:last-child {
+  border-radius: 0 0 0.375rem 0.375rem;
+}
+
+.card,
+.card-header,
+.card-body,
+.card-footer {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.card-shop {
+  transform: skewY(-2deg);
+  transform-origin: top left;
+  transition: all 0.3s ease;
+  font-family: "Fortnite", Helvetica, sans-serif;
+}
+.card-shop .banner .img-preview {
+  display: block;
+  margin: 0 auto;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.card-shop .banner .img-container {
+  padding: 0;
+  background-position: center top;
+  width: 100%;
+  /* height: 344px; */
+  background-size: cover;
+}
+.card-shop .card-body {
+  border-radius: 0;
+}
+.card-shop .card-body .display-name {
+  font-family: "Burbank Big Condensed";
+  text-transform: uppercase;
+  color: #000;
+  font-size: 22px;
+}
+.card-shop .card-body .price-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.card-shop .card-body .price-container .regular-price-text {
+  color: #91a0a5;
+  opacity: 0.7;
+  text-decoration: line-through;
+  font-size: 19px;
+}
+.card-shop .card-body .price-container .price-text {
+  font-size: 26px;
+  white-space: nowrap;
+  color: #000;
+}
+.card-shop .card-body .price-container .price-icon {
+  width: 48px;
+  height: 48px;
+}
+
+.btn-refresh {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #8257e5;
+  color: #ffffff;
+  height: 60px;
+  border-radius: 0.375rem;
+  font-weight: bold;
+  transition: 0.5s ease;
+}
+.btn-refresh:hover {
+  color: #ffffff;
+  opacity: 0.6;
+}
+.btn-refresh:disabled,
+.btn-refresh button[disabled] {
+  cursor: not-allowed;
+}
+
+.scroll-to-top-button {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 999;
+  background-color: #8257e5;
+  border-color: #8257e5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  display: none;
+}
+.scroll-to-top-button svg {
+  fill: #fff;
+}
+.scroll-to-top-button.visible {
+  display: block;
+}
+
+.container-loading {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 9999;
+  background: #fff;
+}
+.container-loading img,
+.container-loading svg {
+  animation: logo ease-in-out 3s infinite;
+}
+.container-loading img.logo,
+.container-loading svg.logo {
+  width: 300px;
+  height: 300px;
+}
+.container-loading img.icon,
+.container-loading svg.icon {
+  width: 200px;
+  height: 200px;
+}
+.container-loading span {
+  animation: text 2s ease infinite;
+  font-size: 70px;
+  text-transform: uppercase;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+@keyframes text {
+  0% {
+    transform: scale(1, 1);
+  }
+  50% {
+    transform: scale(1.2, 1.2);
+  }
+  100% {
+    transform: scale(1, 1);
+  }
+}
+.common {
+  border-top: 5px solid #b0b0b0;
+}
+
+.uncommon {
+  border-top: 5px solid #34c749;
+}
+
+.rare {
+  border-top: 5px solid #3c7bea;
+}
+
+.epic {
+  border-top: 5px solid #a33af3;
+}
+
+.legendary {
+  border-top: 5px solid #f4c542;
+}
+
+.mythic {
+  border-top: 5px solid #f04545;
+}
+
+/*
+.bg_common {
+  background-image: url("https://media.fortniteapi.io/images/rarities/v2/rarity_common.png");
+  background-color: #2d3237;
+  border: 5px solid #b1b1b1;
+}
+.b_common-1 {
+  border: 5px solid #b1b1b1;
+}
+.b_common-2 {
+  border: 5px solid #79858e;
+}
+.b_common-3 {
+  border: 5px solid #2d3237;
+}
+.b_common-4 {
+  border: 5px solid #0d1013;
+}
+.b_common-5 {
+  border: 5px solid #050509;
+}
+.b-t_common {
+  border-top: 5px solid #b1b1b1;
+}
+.b-t_common-2 {
+  border-top: 5px solid #79858e;
+}
+.b-t_common-3 {
+  border-top: 5px solid #2d3237;
+}
+
+.bg_epic {
+  background-image: url("https://media.fortniteapi.io/images/rarities/v2/rarity_epic.png");
+  background-color: #2e07a6;
+  border: 5px solid #d505ff;
+}
+.b_epic-1 {
+  border: 5px solid #d505ff;
+}
+.b_epic-2 {
+  border: 5px solid #9d19ff;
+}
+.b_epic-3 {
+  border: 5px solid #2e07a6;
+}
+.b_epic-4 {
+  border: 5px solid #120233;
+}
+.b_epic-5 {
+  border: 5px solid #07040a;
+}
+.b-t_epic {
+  border-top: 5px solid #d505ff;
+}
+.b-t_epic-2 {
+  border-top: 5px solid #9d19ff;
+}
+.b-t_epic-3 {
+  border-top: 5px solid #2e07a6;
+}
+
+.bg_legendary {
+  background-image: url("https://media.fortniteapi.io/images/rarities/v2/rarity_legendary.png");
+  background-color: #851400;
+  border: 5px solid #f68b20;
+}
+.b_legendary-1 {
+  border: 5px solid #f68b20;
+}
+.b_legendary-2 {
+  border: 5px solid #ff4203;
+}
+.b_legendary-3 {
+  border: 5px solid #851400;
+}
+.b_legendary-4 {
+  border: 5px solid #410b03;
+}
+.b_legendary-5 {
+  border: 5px solid #0a0302;
+}
+.b-t_legendary {
+  border-top: 5px solid #f68b20;
+}
+.b-t_legendary-2 {
+  border-top: 5px solid #ff4203;
+}
+.b-t_legendary-3 {
+  border-top: 5px solid #851400;
+}
+
+.bg_mythic {
+  background-image: url("https://media.fortniteapi.io/images/rarities/v2/rarity_mythic.png");
+  background-color: #947942;
+  border: 5px solid #947942;
+}
+.b_mythic-1 {
+  border: 5px solid #947942;
+}
+.b_mythic-2 {
+  border: 5px solid #947942;
+}
+.b_mythic-3 {
+  border: 5px solid #947942;
+}
+.b_mythic-4 {
+  border: 5px solid #947942;
+}
+.b_mythic-5 {
+  border: 5px solid #947942;
+}
+.b-t_mythic {
+  border-top: 5px solid #947942;
+}
+.b-t_mythic-2 {
+  border-top: 5px solid #947942;
+}
+.b-t_mythic-3 {
+  border-top: 5px solid #947942;
+}
+
+.bg_rare {
+  background-image: url("https://media.fortniteapi.io/images/rarities/v2/rarity_rare.png");
+  background-color: #001985;
+  border: 5px solid #00fff6;
+}
+.b_rare-1 {
+  border: 5px solid #00fff6;
+}
+.b_rare-2 {
+  border: 5px solid #006dff;
+}
+.b_rare-3 {
+  border: 5px solid #001985;
+}
+.b_rare-4 {
+  border: 5px solid #000f41;
+}
+.b_rare-5 {
+  border: 5px solid #03060a;
+}
+.b-t_rare {
+  border-top: 5px solid #00fff6;
+}
+.b-t_rare-2 {
+  border-top: 5px solid #006dff;
+}
+.b-t_rare-3 {
+  border-top: 5px solid #001985;
+}
+*/
+/* Exotic */
+/*
+.bg_transcendent {
+  background-image: url("https://media.fortniteapi.io/images/rarities/v2/rarity_transcendent.png");
+  background-color: #2e85ff;
+  border: 5px solid #00b5f6;
+}
+.b_transcendent-1 {
+  border: 5px solid #00b5f6;
+}
+.b_transcendent-2 {
+  border: 5px solid #00ff69;
+}
+.b_transcendent-3 {
+  border: 5px solid #2e85ff;
+}
+.b_transcendent-4 {
+  border: 5px solid #260d41;
+}
+.b_transcendent-5 {
+  border: 5px solid #0a040a;
+}
+.b-t_transcendent {
+  border-top: 5px solid #00b5f6;
+}
+.b-t_transcendent-2 {
+  border-top: 5px solid #00ff69;
+}
+.b-t_transcendent-3 {
+  border-top: 5px solid #2e85ff;
+}
+
+.bg_uncommon {
+  background-image: url("https://media.fortniteapi.io/images/rarities/v2/rarity_uncommon.png");
+  background-color: #003700;
+  border: 5px solid #5bfd00;
+}
+.b_uncommon-1 {
+  border: 5px solid #5bfd00;
+}
+.b_uncommon-2 {
+  border: 5px solid #1e8500;
+}
+.b_uncommon-3 {
+  border: 5px solid #003700;
+}
+.b_uncommon-4 {
+  border: 5px solid #001400;
+}
+.b_uncommon-5 {
+  border: 5px solid #000800;
+}
+.b-t_uncommon {
+  border-top: 5px solid #5bfd00;
+}
+.b-t_uncommon-2 {
+  border-top: 5px solid #1e8500;
+}
+.b-t_uncommon-3 {
+  border-top: 5px solid #003700;
+}
+/*
+
+/* Dark Series */
+/*
+.bg_cubeseries {
+  background-image: url("https://media.fortniteapi.io/images/rarities/v2/T-Cube-Background.png");
+  background-color: #600063;
+  border: 5px solid #ff138e;
+}
+.b_cubeseries-1 {
+  border: 5px solid #ff138e;
+}
+.b_cubeseries-2 {
+  border: 5px solid #9d006b;
+}
+.b_cubeseries-3 {
+  border: 5px solid #600063;
+}
+.b_cubeseries-4 {
+  border: 5px solid #1c0232;
+}
+.b_cubeseries-5 {
+  border: 5px solid #0a030a;
+}
+.b-t_cubeseries {
+  border-top: 5px solid #ff138e;
+}
+.b-t_cubeseries-2 {
+  border-top: 5px solid #9d006b;
+}
+.b-t_cubeseries-3 {
+  border-top: 5px solid #600063;
+}
+*/
+/* DC Series */
+/*
+.bg_dcuseries {
+  background-image: url("https://media.fortniteapi.io/images/rarities/v2/T-BlackMonday-Background.png");
+  background-color: #000c39;
+  border: 5px solid #0031e0;
+}
+.b_dcuseries-1 {
+  border: 5px solid #0031e0;
+}
+.b_dcuseries-2 {
+  border: 5px solid #001664;
+}
+.b_dcuseries-3 {
+  border: 5px solid #000c39;
+}
+.b_dcuseries-4 {
+  border: 5px solid #000723;
+}
+.b_dcuseries-5 {
+  border: 5px solid #00030f;
+}
+.b-t_dcuseries {
+  border-top: 5px solid #0031e0;
+}
+.b-t_dcuseries-2 {
+  border-top: 5px solid #001664;
+}
+.b-t_dcuseries-3 {
+  border-top: 5px solid #000c39;
+}
+
+.bg_frozenseries {
+  background-image: url("https://media.fortniteapi.io/images/rarities/v2/T_Ui_LavaSeries_Frozen.png");
+  background-color: #0053a8;
+  border: 5px solid #afd7ff;
+}
+.b_frozenseries-1 {
+  border: 5px solid #afd7ff;
+}
+.b_frozenseries-2 {
+  border: 5px solid #0019d8;
+}
+.b_frozenseries-3 {
+  border: 5px solid #0053a8;
+}
+.b_frozenseries-4 {
+  border: 5px solid #0019d8;
+}
+.b_frozenseries-5 {
+  border: 5px solid #3db9ff;
+}
+.b-t_frozenseries {
+  border-top: 5px solid #afd7ff;
+}
+.b-t_frozenseries-2 {
+  border-top: 5px solid #0019d8;
+}
+.b-t_frozenseries-3 {
+  border-top: 5px solid #0053a8;
+}
+*/
+/* Icon Series */
+/*
+.bg_creatorcollabseries {
+  background-image: url("https://media.fortniteapi.io/images/rarities/v2/T_Ui_CreatorsCollab_Bg.png");
+  background-color: #00122a;
+  border: 5px solid #1be2e4;
+}
+.b_creatorcollabseries-1 {
+  border: 5px solid #1be2e4;
+}
+.b_creatorcollabseries-2 {
+  border: 5px solid #069496;
+}
+.b_creatorcollabseries-3 {
+  border: 5px solid #00122a;
+}
+.b_creatorcollabseries-4 {
+  border: 5px solid #001516;
+}
+.b_creatorcollabseries-5 {
+  border: 5px solid #000106;
+}
+.b-t_creatorcollabseries {
+  border-top: 5px solid #1be2e4;
+}
+.b-t_creatorcollabseries-2 {
+  border-top: 5px solid #069496;
+}
+.b-t_creatorcollabseries-3 {
+  border-top: 5px solid #00122a;
+}
+
+.bg_lavaseries {
+  background-image: url("https://media.fortniteapi.io/images/rarities/v2/T_Ui_LavaSeries_Bg.png");
+  background-color: #520009;
+  border: 5px solid #f39d09;
+}
+.b_lavaseries-1 {
+  border: 5px solid #f39d09;
+}
+.b_lavaseries-2 {
+  border: 5px solid #b50401;
+}
+.b_lavaseries-3 {
+  border: 5px solid #520009;
+}
+.b_lavaseries-4 {
+  border: 5px solid #1b001c;
+}
+.b_lavaseries-5 {
+  border: 5px solid #0c000e;
+}
+.b-t_lavaseries {
+  border-top: 5px solid #f39d09;
+}
+.b-t_lavaseries-2 {
+  border-top: 5px solid #b50401;
+}
+.b-t_lavaseries-3 {
+  border-top: 5px solid #520009;
+}
+
+.bg_marvelseries {
+  background: radial-gradient(#d70204, #730000);
+  border: 5px solid #d70204;
+}
+.b_marvelseries-1 {
+  border: 5px solid #d70204;
+}
+.b_marvelseries-2 {
+  border: 5px solid #ab0000;
+}
+.b_marvelseries-3 {
+  border: 5px solid #730000;
+}
+.b_marvelseries-4 {
+  border: 5px solid #1e0000;
+}
+.b_marvelseries-5 {
+  border: 5px solid #050000;
+}
+.b-t_marvelseries {
+  border-top: 5px solid #d70204;
+}
+.b-t_marvelseries-2 {
+  border-top: 5px solid #ab0000;
+}
+.b-t_marvelseries-3 {
+  border-top: 5px solid #730000;
+}
+*/
+/* Gaming Legends Series */
+/*
+.bg_platformseries {
+  background-image: url("https://media.fortniteapi.io/images/rarities/v2/platformseries.png");
+  background-color: #0c0250;
+  border: 5px solid #3730ff;
+}
+.b_platformseries-1 {
+  border: 5px solid #3730ff;
+}
+.b_platformseries-2 {
+  border: 5px solid #1605ab;
+}
+.b_platformseries-3 {
+  border: 5px solid #0c0250;
+}
+.b_platformseries-4 {
+  border: 5px solid #05011d;
+}
+.b_platformseries-5 {
+  border: 5px solid #010005;
+}
+.b-t_platformseries {
+  border-top: 5px solid #3730ff;
+}
+.b-t_platformseries-2 {
+  border-top: 5px solid #1605ab;
+}
+.b-t_platformseries-3 {
+  border-top: 5px solid #0c0250;
+}
+
+.bg_shadowseries {
+  background-image: url("https://media.fortniteapi.io/images/rarities/v2/T_Ui_LavaSeries_Shadow.png");
+  background-color: #111111;
+  border: 5px solid #ffffff;
+}
+.b_shadowseries-1 {
+  border: 5px solid #ffffff;
+}
+.b_shadowseries-2 {
+  border: 5px solid #515151;
+}
+.b_shadowseries-3 {
+  border: 5px solid #111111;
+}
+.b_shadowseries-4 {
+  border: 5px solid #020202;
+}
+.b_shadowseries-5 {
+  border: 5px solid #6e6e6e;
+}
+.b-t_shadowseries {
+  border-top: 5px solid #ffffff;
+}
+.b-t_shadowseries-2 {
+  border-top: 5px solid #515151;
+}
+.b-t_shadowseries-3 {
+  border-top: 5px solid #111111;
+}
+
+.bg_slurpseries {
+  background: radial-gradient(#03f1ed, #008be0);
+  border: 5px solid #008bde;
+}
+.b_slurpseries-1 {
+  border: 5px solid #03f1ed;
+}
+.b_slurpseries-2 {
+  border: 5px solid #09b26a;
+}
+.b_slurpseries-3 {
+  border: 5px solid #008be0;
+}
+.b_slurpseries-4 {
+  border: 5px solid #0248ff;
+}
+.b_slurpseries-5 {
+  border: 5px solid #0241b2;
+}
+.b-t_slurpseries {
+  border-top: 5px solid #03f1ed;
+}
+.b-t_slurpseries-2 {
+  border-top: 5px solid #09b26a;
+}
+.b-t_slurpseries-3 {
+  border-top: 5px solid #008be0;
+}
+
+/* Star Wars Series */
+/*
+.bg_columbusseries {
+  background-image: url("https://media.fortniteapi.io/images/rarities/v2/T_Ui_ColumbusSeries_512.png");
+  background-color: #000208;
+  border: 5px solid #ffaf00;
+}
+.b_columbusseries-1 {
+  border: 5px solid #ffaf00;
+}
+.b_columbusseries-2 {
+  border: 5px solid #041771;
+}
+.b_columbusseries-3 {
+  border: 5px solid #000208;
+}
+.b_columbusseries-4 {
+  border: 5px solid #000001;
+}
+.b_columbusseries-5 {
+  border: 5px solid #000000;
+}
+.b-t_columbusseries {
+  border-top: 5px solid #ffaf00;
+}
+.b-t_columbusseries-2 {
+  border-top: 5px solid #041771;
+}
+.b-t_columbusseries-3 {
+  border-top: 5px solid #000208;
+}
+
+.fg_common {
+  color: #b1b1b1;
+}
+.fg_epic {
+  color: #d505ff;
+}
+.fg_legendary {
+  color: #f68b20;
+}
+.fg_mythic {
+  color: #947942;
+}
+.fg_rare {
+  color: #00fff6;
+}
+.fg_transcendent {
+  color: #00b5f6;
+}
+.fg_uncommon {
+  color: #5bfd00;
+}
+.fg_cubeseries {
+  color: #ff138e;
+}
+.fg_dcuseries {
+  color: #0031e0;
+}
+.fg_frozenseries {
+  color: #afd7ff;
+}
+.fg_creatorcollabseries {
+  color: #1be2e4;
+}
+.fg_lavaseries {
+  color: #f39d09;
+}
+.fg_marvelseries {
+  color: #d70204;
+}
+.fg_platformseries {
+  color: #3730ff;
+}
+.fg_shadowseries {
+  color: #ffffff;
+}
+.fg_slurpseries {
+  color: #03f1ed;
+}
+.fg_columbusseries {
+  color: #ffaf00;
+}
+*/

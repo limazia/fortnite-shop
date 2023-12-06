@@ -1,0 +1,22 @@
+@font-face {
+  font-family: "Burbank Big Condensed";
+  font-style: normal;
+  font-weight: normal;
+  font-display: swap;
+  src: url("assets/fonts/fortnite/burbank.eot");
+  src:
+    url("assets/fonts/fortnite/burbank.eot?#iefix") format("embedded-opentype"),
+    url("assets/fonts/fortnite/burbank.woff2") format("woff2"),
+    url("assets/fonts/fortnite/burbank.woff") format("woff"),
+    url("assets/fonts/fortnite/burbank.ttf") format("truetype"),
+    url("assets/fonts/fortnite/burbank.svg#Burbank Big Condensed") format("svg");
+}
+
+@font-face {
+  font-family: "Fortnite";
+  src:
+    url("assets/fonts/fortnite/Fortnite.woff2") format("woff2"),
+    url("assets/fonts/fortnite/Fortnite.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
