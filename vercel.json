@@ -1,8 +1,8 @@
 {
   "rewrites": [
     {
-      "source": "/fonts/(.*)",
-      "destination": "/public/assets/fonts/$1"
+      "source": "/assets/fonts/:path*",
+      "destination": "/assets/fonts/:path*"
     }
   ]
 }
