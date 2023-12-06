@@ -1,6 +1,6 @@
 # Fortnite Shop
 
-A "Fortnite Shop" é uma aplicação que fornece informações sobre os itens disponíveis na loja do jogo Fortnite para o dia atual. A API utiliza a plataforma [FortniteAPI](https://fortniteapi.io/) para obter os dados necessários.
+A "[Fortnite Shop](https://fortniteshop.vercel.app/)" é uma aplicação que fornece informações sobre os itens disponíveis na loja do jogo Fortnite para o dia atual. A API utiliza a plataforma [FortniteAPI](https://fortniteapi.io/) para obter os dados necessários.
 
 ## Configuração
 
