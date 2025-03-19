@@ -1,30 +1,50 @@
-import { useEffect, useState } from "react";
-import moment from "moment-timezone";
+import { useState, useEffect } from "react";
+import { differenceInSeconds, addDays, set } from "date-fns";
+import { toZonedTime } from "date-fns-tz";
 
-export function useCountdown() {
-  const [countdown, setCountdown] = useState<string>("");
+export function useCountdown(targetHour = 21, targetMinute = 0) {
+  const [countdown, setCountdown] = useState("");
 
   useEffect(() => {
-    const brtTimezone = "America/Sao_Paulo";
-    const targetTime = moment().tz(brtTimezone).hour(21).minute(0).second(0);
-    let duration = moment.duration(targetTime.diff(moment().tz(brtTimezone)));
+    const calculateTimeRemaining = () => {
+      const timeZone = "America/Sao_Paulo";
+      const now = toZonedTime(new Date(), timeZone);
+
+      let target = set(now, {
+        hours: targetHour,
+        minutes: targetMinute,
+        seconds: 0,
+        milliseconds: 0,
+      });
+
+      if (now > target) {
+        target = set(addDays(now, 1), {
+          hours: targetHour,
+          minutes: targetMinute,
+          seconds: 0,
+          milliseconds: 0,
+        });
+      }
+
+      const diff = differenceInSeconds(target, now);
+
+      const hours = Math.floor(diff / 3600);
+      const minutes = Math.floor((diff % 3600) / 60);
+      const seconds = diff % 60;
+
+      return `${hours.toString().padStart(2, "0")}:${minutes
+        .toString()
+        .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+    };
+
+    setCountdown(calculateTimeRemaining());
 
     const intervalId = setInterval(() => {
-      duration = moment.duration(duration.asMilliseconds() - 1000);
-
-      const formattedCountdown = moment
-        .utc(duration.asMilliseconds())
-        .format("HH:mm:ss");
-
-      setCountdown(formattedCountdown);
-
-      if (duration.asSeconds() <= 0) {
-        clearInterval(intervalId);
-      }
+      setCountdown(calculateTimeRemaining());
     }, 1000);
 
-    return () => clearInterval(intervalId); // Limpar intervalo no desmontar do componente
-  }, []);
+    return () => clearInterval(intervalId);
+  }, [targetHour, targetMinute]);
 
-  return [countdown];
+  return countdown;
 }
