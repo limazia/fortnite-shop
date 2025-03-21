@@ -1,11 +1,11 @@
 import axios from "axios";
 
-const ENABLE_API_DELAY = true;
+const ENABLE_API_DELAY = false;
 
 export const api = axios.create({
-  baseURL: process.env.FORTNITE_URL_API,
+  baseURL: process.env.FORTNITE_API_BASE_URL,
   headers: {
-    Authorization: process.env.FORTNITE_URL_TOKEN,
+    Authorization: process.env.FORTNITE_API_TOKEN,
   },
 });
 
