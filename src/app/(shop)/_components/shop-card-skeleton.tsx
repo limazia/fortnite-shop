@@ -5,7 +5,7 @@ export function ShopCardSkeleton() {
     <div className="col-span-full space-y-12">
       <div className="flex items-center gap-3">
         <Skeleton className="w-2 h-[1px] rounded-full" />
-        <Skeleton className="w-32 h-6" />
+        <Skeleton className="w-32 h-9 [transform:skewY(-2deg)] [transform-origin:top_left] transition-all duration-300" />
         <Skeleton className="flex-1 h-[1px] rounded-full" />
       </div>
 

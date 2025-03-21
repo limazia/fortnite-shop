@@ -60,7 +60,7 @@ export default function Shop() {
                 <div key={section} className="col-span-full space-y-12">
                   <div className="flex items-center gap-3">
                     <div className="w-2 h-[1px] bg-gray-300/60 rounded-full" />
-                    <span className="border border-gray-300 text-black/80 rounded-md px-2 py-1 inline-block text-xl font-medium">
+                    <span className="border border-gray-300 text-black/80 rounded-md px-2 py-1 inline-block text-xl font-medium [transform:skewY(-2deg)] [transform-origin:top_left] transition-all duration-300 font-['Fortnite',Helvetica,sans-serif]">
                       {section.toUpperCase()}
                     </span>
                     <div className="flex-1 h-[1px] bg-gray-300/60 rounded-full" />
