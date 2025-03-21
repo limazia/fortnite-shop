@@ -75,18 +75,22 @@ export default function Shop() {
               );
             })}
         </div>
+        
+        {data && data.shop.length === 0 && (
+          <div className="flex flex-col items-center justify-center py-10">
+            <Image src={NotFound} alt="Not Found" className="w-auto h-48" />
 
-        <div className="flex flex-col items-center justify-center py-10">
-          <Image src={NotFound} alt="Not Found" className="w-auto h-48" />
+            <div className="flex flex-col text-center space-y-2 mt-12">
+              <span className="font-bold text-xl">
+                Nenhum item encontrado na loja
+              </span>
 
-          <div className="flex flex-col text-center space-y-2 mt-12">
-            <span className="font-bold text-xl">
-              Nenhum item encontrado na loja
-            </span>
-
-            <small className="text-gray-500">Tente novamente mais tarde</small>
+              <small className="text-gray-500">
+                Tente novamente mais tarde
+              </small>
+            </div>
           </div>
-        </div>
+        )}
       </div>
 
       <footer className="w-full">
