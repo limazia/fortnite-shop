@@ -13,13 +13,13 @@ interface ShopCardProps {
 export function ShopCard({ shop }: ShopCardProps) {
   const {
     displayName,
-    displayAssets,
+    displayAssets = [],
     displayType,
     displayDescription,
     price,
     rarity,
   } = shop;
-  const { background } = displayAssets[0];
+  const background = displayAssets[0]?.background || Default;
   const { regularPrice, finalPrice } = price;
 
   const rarityStyles: Record<Rarity["id"], string> = {
@@ -37,7 +37,7 @@ export function ShopCard({ shop }: ShopCardProps) {
     <div className="rounded-md border-2 border-[#d0d7de] bg-white text-black [transform:skewY(-2deg)] [transform-origin:top_left] transition-all duration-300">
       <div className="banner">
         <Image
-          src={background || Default}
+          src={background}
           alt="Banner"
           className="block mx-auto object-contain w-full bg-center bg-no-repeat"
           width={300}
@@ -60,14 +60,17 @@ export function ShopCard({ shop }: ShopCardProps) {
         </div>
 
         <div className="flex items-center justify-start gap-2 font-['Fortnite',Helvetica,sans-serif]">
-          <Image src={VBuck} alt="V-Bucks" className="w-12 h-auto" />
-          <div className="flex flex-col">
-            {regularPrice !== finalPrice && (
-              <span className="text-gray-700 line-through">{regularPrice}</span>
-            )}
-            <span className="text-2xl whitespace-nowrap text-black">
+          <Image src={VBuck} alt="V-Bucks" className="w-8 h-auto" />
+          <div className="flex items-start gap-3">
+            <span className="text-4xl whitespace-nowrap text-black">
               {finalPrice}
             </span>
+
+            {regularPrice !== finalPrice && (
+              <span className="text-xl text-gray-500 line-through">
+                {regularPrice}
+              </span>
+            )}
           </div>
         </div>
       </div>
